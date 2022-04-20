@@ -44,12 +44,27 @@ public class ServicioController {
     }
 
     @GetMapping("/nuevo")
-    public String nuevoServicio(Model model) {
+    public String nuevoServicioMascota(Model model) {
         model.addAttribute("listaResponsable", responsableRepository.findAll());
         model.addAttribute("listaCuenta", cuentaRepository.findAll());
         model.addAttribute("listaOpcion", opcionRepository.findAll());
         model.addAttribute("listaMascotas", mascotaRepository.findAll());
         return "servicio/nuevo";
+    }
+
+    @GetMapping("/nuevocrear")
+    public String crearServicio() {
+        return "servicio/crearForm";
+    }
+
+    @PostMapping("/guardarnuevoserv")
+    public String guardarNuevoServicio(Opcion opcion, RedirectAttributes attr) {
+
+        attr.addFlashAttribute("msg", "Servicio creado exitosamente");
+
+        opcionRepository.save(opcion);
+
+        return "redirect:/servicio/lista";
     }
 
     @PostMapping("/guardar")

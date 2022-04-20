@@ -2,9 +2,7 @@ package com.example.lab3grupo1.controller;
 
 import com.example.lab3grupo1.entity.Mascota;
 import com.example.lab3grupo1.entity.Servicio;
-import com.example.lab3grupo1.repository.MascotaRepository;
-import com.example.lab3grupo1.repository.RazaRepository;
-import com.example.lab3grupo1.repository.ServicioRepository;
+import com.example.lab3grupo1.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,9 +41,9 @@ public class MascotaController {
     public String listaServiciosMascotas(@ModelAttribute("servicio") Servicio servicio,
                                          @RequestParam("id") int idmascota, Model model){
         model.addAttribute("listaServiciosMascota", servicioRepository.listaServiciosMascota(idmascota));
+        model.addAttribute("idmascota",idmascota);
         return "mascota/listaservmasc";
     }
-
 
     @PostMapping("/search")
     public String buscar(Model model, @RequestParam("parametro") String parametro, @RequestParam("buscador") String buscador, RedirectAttributes attr) {
