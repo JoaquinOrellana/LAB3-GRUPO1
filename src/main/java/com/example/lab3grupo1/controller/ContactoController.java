@@ -1,6 +1,7 @@
 package com.example.lab3grupo1.controller;
 
 
+import com.example.lab3grupo1.entity.Cuenta;
 import com.example.lab3grupo1.entity.Mascota;
 import com.example.lab3grupo1.repository.CuentaRepository;
 import com.example.lab3grupo1.repository.MascotaRepository;
@@ -16,9 +17,6 @@ import java.util.Optional;
 @RequestMapping("/contacto")
 public class ContactoController {
     @Autowired
-    ContactoRepository contactoRepository;
-
-    @Autowired
     MascotaRepository mascotaRepository;
 
     @Autowired
@@ -26,25 +24,24 @@ public class ContactoController {
 
     @GetMapping(value = {"", "/lista"})
     public String listaContacto(Model model){
-        model.addAttribute("listaContacto", contactoRepository.findAll());
+        model.addAttribute("listaContacto", cuentaRepository.findAll());
         return "contacto/lista";
     }
     @GetMapping("/new")
     public String nuevoContactoForm(Model model) {
-        model.addAttribute("listaContacto", contactoRepository.findAll());
+        model.addAttribute("listaContacto", cuentaRepository.findAll());
         return "contacto/form";
     }
 
     @GetMapping("/editar")
-    public String editarContacto(@ModelAttribute("contacto") Contacto contacto,
+    public String editarContacto(@ModelAttribute("contacto") Cuenta contacto,
                                 @RequestParam("id") int id,
                                 Model model) {
-        Optional<Contacto> optionalContacto = contactoRepository.findById(id);
+        Optional<Cuenta> optcontacto = cuentaRepository.findById(id);
         System.out.println(id);
-        if (optionalContacto.isPresent()) {
-            contacto = optionalContacto.get();
+        if (optcontacto.isPresent()) {
+            contacto = optcontacto.get();
             model.addAttribute("contacto", contacto);
-            model.addAttribute("listaContacto", contactoRepository.findAll());
             model.addAttribute("listaCuenta", cuentaRepository.findAll());
             return "/contacto/editar";
         } else {
@@ -53,22 +50,21 @@ public class ContactoController {
     }
 
     @PostMapping("/save")
-    public String guardarContacto(Contacto contacto, RedirectAttributes attr, Model model) {
+    public String guardarContacto(Cuenta contacto, RedirectAttributes attr, Model model) {
 
-        if (contacto.getIdcontacto() == 0) {
-            attr.addFlashAttribute("msg", "Contacto creada exitosamente");
+        if (contacto.getId() == 0) {
+            attr.addFlashAttribute("msg", "Contacto creado exitosamente");
         } else {
-            attr.addFlashAttribute("msg", "Contacto actualizada exitosamente");
+            attr.addFlashAttribute("msg", "Contacto actualizado exitosamente");
         }
 
-        if (contacto.getCuenta() != null) {
-            contactoRepository.save(contacto);
+        if (contacto.getId() != null) {
+            cuentaRepository.save(contacto);
             return "redirect:/mascota/lista";
         } else {
             model.addAttribute("errProd", "Error al guardar contacto");
-            model.addAttribute("listaContacto", contactoRepository.findAll());
             model.addAttribute("listaCuenta", cuentaRepository.findAll());
-            if (contacto.getIdcontacto() != 0) {
+            if (contacto.getId() != 0) {
                 model.addAttribute("contacto", contacto);
                 return "contacto/editar";
             } else {

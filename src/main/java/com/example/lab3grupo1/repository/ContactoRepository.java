@@ -1,6 +1,7 @@
 package com.example.lab3grupo1.repository;
 
 import com.example.lab3grupo1.dto.ServiciosMascotaDto;
+import com.example.lab3grupo1.entity.Cuenta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
