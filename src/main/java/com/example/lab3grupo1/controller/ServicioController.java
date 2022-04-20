@@ -68,7 +68,7 @@ public class ServicioController {
         opcionRepository.save(opc);
         servicioRepository.save(servicio);
         attr.addFlashAttribute("msg", "1");
-        return "redirect:/servicio";
+        return "redirect:/servicio/lista";
     }
 
     @GetMapping("/editar")
@@ -122,7 +122,7 @@ public class ServicioController {
         servicioRepository.save(serv);
         opcionServicioRepository.save(opServ);
         attr.addFlashAttribute("msg", "0");
-        return "redirect:/servicio";
+        return "redirect:/servicio/lista";
     }
 
 }
