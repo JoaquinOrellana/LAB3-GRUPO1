@@ -9,7 +9,41 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <title>Editar Contacto</title>
 </head>
-<body>
+<body class="container">
+
+<h2>Editar Contacto</h2>
+<hr/>
+<form method="post" th:action="@{'/contacto/save'}" th:object="${contacto}">
+    <input th:if="*{idcuenta != 0 }" type="hidden" th:field="*{idcuenta}" />
+    <div class="form-row">
+        <div class="col-md-8 mb-4">
+            <div class="form-group">
+                <label  class="small mb-1">Nueva Contraseña</label>
+                <input class="form-control" th:field="*{password}">
+
+            </div>
+        </div>
+        <div class="col-md-8 mb-4">
+            <div class="form-group">
+                <label  class="small mb-1">Nueva Dirección</label>
+                <input class="form-control" th:field="*{direccion}">
+
+            </div>
+        </div>
+        <div class="col-md-8 mb-4">
+            <div class="form-group">
+
+                <button type="submit" class="btn btn-danger">Eliminar mascota</button>
+            </div>
+        </div>
+
+        <div class="form-group col-md-8 mt-4">
+            <a th:href="@{/contacto/lista}" class="btn btn-danger">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+        </div>
+    </div>
+</form>
+<br>
 
 </body>
 </html>
