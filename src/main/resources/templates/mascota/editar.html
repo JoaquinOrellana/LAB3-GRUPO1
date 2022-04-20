@@ -12,37 +12,39 @@
 
         <h2>Editar Mascota</h2>
         <hr/>
-        <form method="post" th:action="@{'/mascota/actualizar'}" th:object="${mascota}">
+        <form method="post" th:action="@{/mascota/actualizar}" th:object="${mascota}">
+            <input th:if="*{idmascota != 0 }" type="hidden" th:field="*{idmascota}" />
             <div class="form-row">
                 <div class="col-md-8 mb-4">
                     <div class="form-group">
                         <label  class="small mb-1">Nombre</label>
-                        <input th:value="${mascota.nombre}" name="nombre" type="text" class="form-control" id="nombre"/>
+                        <input class="form-control" th:field="*{nombre}">
+
                     </div>
                 </div>
                 <div class="col-md-8 mb-4">
                     <div class="form-group">
                         <label  class="small mb-1">Año</label>
-                        <input th:value="${mascota.anho}" name="anho" type="text" class="form-control" id="anho"/>
+                        <input class="form-control" th:field="*{anho}">
 
                     </div>
                 </div>
                 <div class="col-md-8 mb-4">
                     <div class="form-group">
                         <label class="small mb-1">Historia</label>
-                        <input th:value="${mascota.historia}" name="historia" type="text" class="form-control" id="historia"/>
+                        <input class="form-control" th:field="*{historia}">
                     </div>
                 </div>
                 <div class="col-md-8 mb-4">
                     <div class="form-group">
                         <label class="small mb-1">Observaciones</label>
-                        <input th:value="${mascota.observaciones}" name="observaciones" type="text" class="form-control" id="observaciones"/>
+                        <input class="form-control" th:field="*{observaciones}">
                     </div>
                 </div>
                 <div class="col-md-8 mb-4">
                     <div class="form-group">
                         <label  class="small mb-1">Sexo</label>
-                        <input th:value="${mascota.sexo}" name="sexo" type="text" class="form-control" id="sexo"/>
+                        <input class="form-control" th:field="*{sexo}">
 
                     </div>
                 </div>
@@ -58,7 +60,7 @@
                 </div>
                 <div class="form-group mt-4">
                     <a th:href="@{/mascota/lista}" class="btn btn-danger">Cancelar</a>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
                 </div>
             </div>
         </form>

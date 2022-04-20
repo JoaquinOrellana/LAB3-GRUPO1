@@ -7,7 +7,7 @@
         <div class="container">
             <h1>Lista de Mascotas en TeleVet</h1>
             <a class="btn btn-primary mt-4 mb-4" th:href="@{'/mascota/new'}">Nueva Mascota</a>
-            <a class="btn btn-secondary ms-auto" th:href="@{'/'}">Regresar</a>
+            <a class="btn btn-secondary ms-auto" th:href="@{'/'}">Pagina Principal</a>
             <div class="row" style="display: flex;justify-content: center;margin-bottom: 20px">
                 <form method="post" th:action="@{'/mascota/search'}">
                     <div class="input-group">
@@ -61,7 +61,7 @@
                         <td th:text="${mascota.getRaza_especie().getDescripcion()}"></td>
                         <td><a class="btn btn-info" th:href="@{'/mascota/servicioinfo' + '?id=' + ${mascota.idmascota}}">Detalle de servicios</a>
                         </td>
-                        <td><a class="btn btn-primary" th:href="@{'/mascota/edit' + '?id=' + ${mascota.idmascota}}">Editar</a>
+                        <td><a class="btn btn-primary" th:href="@{'/mascota/editar' + '?id=' + ${mascota.idmascota}}">Editar</a>
                         </td>
                         <td><a class="btn btn-danger" th:href="@{'/mascota/delete' + '?id=' + ${mascota.idmascota}}">Eliminar</a>
                         </td>

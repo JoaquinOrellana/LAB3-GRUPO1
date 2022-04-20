@@ -100,13 +100,13 @@ public class MascotaController {
     public String editarMascota(@ModelAttribute("mascota") Mascota mascota,
                                 @RequestParam("id") int id,
                                 Model model) {
-        Optional<Mascota> mascotaOptional = mascotaRepository.findById(id);
+        Optional<Mascota> optionalMascota = mascotaRepository.findById(id);
         System.out.println(id);
-        if (mascotaOptional.isPresent()) {
-            mascota = mascotaOptional.get();
+        if (optionalMascota.isPresent()) {
+            mascota = optionalMascota.get();
+            model.addAttribute("mascota", mascota);
             model.addAttribute("listaMascota", mascotaRepository.findAll());
             model.addAttribute("listaRaza", razaRepository.findAll());
-            ;
             return "/mascota/editar";
         } else {
             return "redirect:/mascota/lista";
