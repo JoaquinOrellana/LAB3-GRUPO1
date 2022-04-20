@@ -37,7 +37,7 @@ public class Mascota{
 
     @ManyToOne
     @JoinColumn(name = "cuenta_idcuenta")
-    private Raza_especie cuenta_idcuenta;
+    private Cuenta cuenta_idcuenta;
 
 
 
@@ -105,14 +105,12 @@ public class Mascota{
         this.raza_especie = raza_especie;
     }
 
-    public Raza_especie getCuenta_idcuenta() {
+    public Cuenta getCuenta_idcuenta() {
         return cuenta_idcuenta;
     }
 
-    public void setCuenta_idcuenta(Raza_especie cuenta_idcuenta) {
+    public void setCuenta_idcuenta(Cuenta cuenta_idcuenta) {
         this.cuenta_idcuenta = cuenta_idcuenta;
     }
-
-
 }
 

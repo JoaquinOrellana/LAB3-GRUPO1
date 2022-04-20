@@ -114,30 +114,31 @@ public class MascotaController {
     }
 
     @PostMapping("/save")
-    public String guardarMascota(@ModelAttribute("mascota") @Valid Mascota mascota, BindingResult bindingResult,
-                                 RedirectAttributes attr, Model model) {
-        if (bindingResult.hasErrors()) {
+    public String guardarMascota(Mascota mascota, RedirectAttributes attr, Model model) {
+
+        if (mascota.getIdmascota() == 0) {
+            attr.addFlashAttribute("msg", "Mascota creada exitosamente");
+        } else {
+            attr.addFlashAttribute("msg", "Mascota actualizada exitosamente");
+        }
+
+        if (mascota.getRaza_especie() != null) {
+            mascotaRepository.save(mascota);
+            return "redirect:/mascota/lista";
+        } else {
+            model.addAttribute("errProd", "Error al crear producto");
             model.addAttribute("listaMascota", mascotaRepository.findAll());
             model.addAttribute("listaRaza", razaRepository.findAll());
-            return "mascota/form";
-        } else if (mascota.getIdmascota() == 0) {
-                attr.addFlashAttribute("msg", "Mascota creado exitosamente");
-                mascotaRepository.save(mascota);
-                return "redirect:/mascota/lista";
+            if (mascota.getIdmascota() != 0) {
+                model.addAttribute("mascota", mascota);
+                return "mascota/editar";
+            } else {
+                return "mascota/form";
             }
-        return "redirect:/mascota/lista";
         }
-    @PostMapping("/actualizar")
-    public String actualizar(Mascota mascotaForm, RedirectAttributes attr) {
-        Optional<Mascota> optMascota = mascotaRepository.findById(mascotaForm.getIdmascota());
-        if (optMascota.isPresent()) {
-            Mascota mascotaFormDB = optMascota.get();
-            mascotaFormDB.setNombre(mascotaForm.getNombre());
-            mascotaRepository.save(mascotaFormDB);
-            attr.addFlashAttribute("msgEdit", "Mascota editada exitosamente");
+
         }
-        return "redirect:/mascota/lista";
-    }
+
     @GetMapping("/delete")
     public String borrarMascota(Model model,
                                  @RequestParam("id") int id,
