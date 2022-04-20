@@ -85,17 +85,18 @@ public class MascotaController {
         return "mascota/form";
     }
 
-    @GetMapping("/edit")
+    @GetMapping("/editar")
     public String editarMascota(@ModelAttribute("mascota") Mascota mascota,
-                                @RequestParam("idmascota") int id,
+                                @RequestParam("id") int id,
                                 Model model) {
         Optional<Mascota> mascotaOptional = mascotaRepository.findById(id);
+        System.out.println(id);
         if (mascotaOptional.isPresent()) {
             mascota = mascotaOptional.get();
             model.addAttribute("listaMascota", mascotaRepository.findAll());
             model.addAttribute("listaRaza", razaRepository.findAll());
             ;
-            return "/mascota/form";
+            return "/mascota/editar";
         } else {
             return "redirect:/mascota/lista";
         }
@@ -115,6 +116,30 @@ public class MascotaController {
             }
         return "redirect:/mascota/lista";
         }
+    @PostMapping("/actualizar")
+    public String actualizar(Mascota mascotaForm, RedirectAttributes attr) {
+        Optional<Mascota> optMascota = mascotaRepository.findById(mascotaForm.getIdmascota());
+        if (optMascota.isPresent()) {
+            Mascota mascotaFormDB = optMascota.get();
+            mascotaFormDB.setNombre(mascotaForm.getNombre());
+            mascotaRepository.save(mascotaFormDB);
+            attr.addFlashAttribute("msgEdit", "Mascota editada exitosamente");
+        }
+        return "redirect:/mascota/lista";
+    }
+    @GetMapping("/delete")
+    public String borrarMascota(Model model,
+                                 @RequestParam("id") int id,
+                                 RedirectAttributes attr) {
+
+        Optional<Mascota> optMascota = mascotaRepository.findById(id);
+
+        if (optMascota.isPresent()) {
+            mascotaRepository.deleteById(id);
+            attr.addFlashAttribute("msg","Mascota borrado exitosamente");
+        }
+        return "redirect:/mascota/lista";
+    }
     }
 
 

@@ -112,5 +112,7 @@ public class Mascota{
     public void setCuenta_idcuenta(Raza_especie cuenta_idcuenta) {
         this.cuenta_idcuenta = cuenta_idcuenta;
     }
+
+
 }
 
