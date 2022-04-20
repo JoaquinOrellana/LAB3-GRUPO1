@@ -28,14 +28,14 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Precio</label>
-                    <input name="precio" type="number" step="0.01" class="form-control" min="0"
+                    <input name="precioopc" type="number" step="0.01" class="form-control" min="0"
                            th:value="${opcion.precio}" required>
                 </div>
             <div class="mb-3">
                 <label class="form-label">Responsable</label>
                 <div class="mb-3">
                     <input name="idservicio" type="number" class="form-control" th:value="${servicio.id}" hidden>
-                    <select class="form-select" aria-label="Default select example" name="idResponsable">
+                    <select class="form-select" aria-label="Default select example" name="idresponsable">
                         <option th:each="resp : ${listaResponsable}" th:value="${resp.id}" th:text="${resp.nombre}" th:selected="${servicio.idresponsable.id == resp.id}"></option>
                     </select>
                 </div>
