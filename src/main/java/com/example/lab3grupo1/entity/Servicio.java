@@ -15,9 +15,9 @@ public class Servicio {
     @JoinColumn(name = "mascota_idmascota", nullable = false)
     private Mascota idmascota;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cuenta_idcuenta", nullable = false)
-    private Cuenta idcuenta;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "cuenta_idcuenta", nullable = false)
+//    private Cuenta idcuenta;
 
     @Column(name = "hora_inicio", nullable = false)
     private Instant horainicio;
@@ -65,13 +65,13 @@ public class Servicio {
         this.horainicio = horainicio;
     }
 
-    public Cuenta getIdcuenta() {
-        return idcuenta;
-    }
+//    public Cuenta getIdcuenta() {
+//        return idcuenta;
+//    }
 
-    public void setIdcuenta(Cuenta idcuenta) {
-        this.idcuenta = idcuenta;
-    }
+//    public void setIdcuenta(Cuenta idcuenta) {
+//        this.idcuenta = idcuenta;
+//    }
 
     public Mascota getIdmascota() {
         return idmascota;
