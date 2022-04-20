@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <title>Lista de Mascotas en TeleVet</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Lista de Mascotas en TeleVet</h1>
+            <a class="btn btn-primary mt-4 mb-4" th:href="@{'/mascota/new'}">Nueva Mascota</a>
+
+            </form>
+            <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cargo</th>
+                        <th>Departamento</th>
+                        <th>Ciudad</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="employee, info : ${listaEmployee}">
+                        <td th:text="${info.index + 1}"></td>
+                        <td th:text="${employee.firstname}"></td>
+                        <td th:text="${employee.lastname}"></td>
+                        <td th:text="${employee.jobs.jobtitle}"></td>
+                        <td th:text="${employee.departments.departmentname}"></td>
+                        <td th:text="${employee.departments.locationid.city}"></td>
+                        <td><a class="btn btn-primary" th:href="@{'/mascota/edit' + '?id=' + ${employee.employeeid}}">Editar</a>
+                        </td>
+                        <td><a class="btn btn-danger" th:href="@{'/mascota/delete' + '?id=' + ${employee.employeeid}}">Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
