@@ -10,7 +10,7 @@
     <title>Nuevo Contacto</title>
 </head>
 <body class="container">
-<h2 th:text="${cuenta.idcuenta == 0? 'Nuevo Contacto' : 'Editar Contacto'}">Nuevo Contacto</h2>
+<h2 th:text="${cuenta.id == 0? 'Nuevo Contacto' : 'Editar Contacto'}">Nuevo Contacto</h2>
 <hr/>
 
 <form method="post" th:action="@{/contacto/save}" th:object="${cuenta}">
