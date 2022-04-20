@@ -12,7 +12,7 @@
 <body>
 <div class="container">
     <h1>Lista de Contactos en TeleVet</h1>
-    <a class="btn btn-primary mt-4 mb-4" th:href="@{'/contacto/newForm'}">Nuevo Contacto</a>
+    <a class="btn btn-primary mt-4 mb-4" th:href="@{'/contacto/new'}">Nuevo Contacto</a>
     <a class="btn btn-secondary ms-auto" th:href="@{'/'}">Pagina Principal</a>
     <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
     <table class="table">
