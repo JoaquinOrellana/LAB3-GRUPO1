@@ -11,24 +11,24 @@ public class Servicio {
     @Column(name = "idservicio", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "mascota_idmascota", nullable = false)
-    private Mascota idmascota;
+        @ManyToOne(fetch = FetchType.LAZY, optional = false)
+        @JoinColumn(name = "mascota_idmascota", nullable = false)
+        private Mascota idmascota;
+    /*
+                @ManyToOne(fetch = FetchType.LAZY, optional = false)
+                @JoinColumn(name = "cuenta_idcuenta", nullable = false)
+                private Cuenta idcuenta;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "cuenta_idcuenta", nullable = false)
-//    private Cuenta idcuenta;
+                @Column(name = "hora_inicio", nullable = false)
+                private Instant horainicio;
 
-    @Column(name = "hora_inicio", nullable = false)
-    private Instant horainicio;
+                @Column(name = "duracion", nullable = false)
+                private Integer duracion;
 
-    @Column(name = "duracion", nullable = false)
-    private Integer duracion;
-
-    @Lob
-    @Column(name = "entrega", nullable = false)
-    private String entrega;
-
+                @Lob
+                @Column(name = "entrega", nullable = false)
+                private String entrega;
+            */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "responsable_idresponsable", nullable = false)
     private Responsable idresponsable;
@@ -41,7 +41,7 @@ public class Servicio {
         this.idresponsable = idresponsable;
     }
 
-    public String getEntrega() {
+    /*public String getEntrega() {
         return entrega;
     }
 
@@ -72,7 +72,7 @@ public class Servicio {
 //    public void setIdcuenta(Cuenta idcuenta) {
 //        this.idcuenta = idcuenta;
 //    }
-
+*/
     public Mascota getIdmascota() {
         return idmascota;
     }
