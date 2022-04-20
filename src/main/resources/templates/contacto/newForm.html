@@ -13,7 +13,7 @@
 <h2 th:text="${cuenta.idcuenta == 0? 'Nuevo Contacto' : 'Editar Contacto'}">Nuevo Contacto</h2>
 <hr/>
 
-<form method="post" th:action="@{/mascota/save}" th:object="${mascota}">
+<form method="post" th:action="@{/contacto/save}" th:object="${cuenta}">
     <div class="form-row">
         <div class="col-md-8 mb-4">
             <div class="form-group">
