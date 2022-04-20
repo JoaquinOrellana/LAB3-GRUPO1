@@ -29,8 +29,8 @@ public class ContactoController {
     }
     @GetMapping("/new")
     public String nuevoContactoForm(Model model) {
-        model.addAttribute("listaContacto", cuentaRepository.findAll());
-        return "contacto/form";
+        //model.addAttribute("listaContacto", cuentaRepository.findAll());
+        return "contacto/newForm";
     }
 
     @GetMapping("/editar")
@@ -68,7 +68,7 @@ public class ContactoController {
                 model.addAttribute("contacto", contacto);
                 return "contacto/editar";
             } else {
-                return "contacto/form";
+                return "contacto/newForm";
             }
         }
 
