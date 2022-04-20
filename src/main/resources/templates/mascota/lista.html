@@ -19,26 +19,26 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Cargo</th>
-                        <th>Departamento</th>
-                        <th>Ciudad</th>
-                        <th></th>
+                        <th>Nombre Mascota</th>
+                        <th>Año</th>
+                        <th>Sexo</th>
+                        <th>Raza</th>
+                        <th>Servicios</th>
+                        <th>Accion</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="employee, info : ${listaEmployee}">
+                    <tr th:each="mascota, info : ${listaMascota}">
                         <td th:text="${info.index + 1}"></td>
-                        <td th:text="${employee.firstname}"></td>
-                        <td th:text="${employee.lastname}"></td>
-                        <td th:text="${employee.jobs.jobtitle}"></td>
-                        <td th:text="${employee.departments.departmentname}"></td>
-                        <td th:text="${employee.departments.locationid.city}"></td>
-                        <td><a class="btn btn-primary" th:href="@{'/mascota/edit' + '?id=' + ${employee.employeeid}}">Editar</a>
+                        <td th:text="${mascota.nombre}"></td>
+                        <td th:text="${mascota.anho}"></td>
+                        <td th:text="${mascota.sexo}"></td>
+                        <td th:text="${mascota.getRaza_especie().getDescripcion()}"></td>
+                        <!--<td th:text="${employee.departments.locationid.city}"></td> -->
+                        <td><a class="btn btn-primary" th:href="@{'/mascota/edit' + '?id=' + ${mascota.idmascota}}">Editar</a>
                         </td>
-                        <td><a class="btn btn-danger" th:href="@{'/mascota/delete' + '?id=' + ${employee.employeeid}}">Eliminar</a>
+                        <td><a class="btn btn-danger" th:href="@{'/mascota/delete' + '?id=' + ${mascota.idmascota}}">Eliminar</a>
                         </td>
                     </tr>
                 </tbody>

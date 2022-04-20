@@ -25,15 +25,21 @@ public class Mascota{
 
     @Column(name = "sexo")
     private String sexo;
-
-    @Column(name = "raza_especie_idraza")
-    private int raza_especie_idraza;
-
     @Column(name = "raza_otros")
     private String raza_otros;
 
-    @Column(name = "cuenta_idcuenta")
-    private int cuenta_idcuenta;
+
+
+    @ManyToOne
+    @JoinColumn(name = "raza_especie_idraza")
+    private Raza_especie raza_especie;
+
+
+    @ManyToOne
+    @JoinColumn(name = "cuenta_idcuenta")
+    private Raza_especie cuenta_idcuenta;
+
+
 
     public int getIdmascota() {
         return idmascota;
@@ -83,14 +89,6 @@ public class Mascota{
         this.sexo = sexo;
     }
 
-    public int getRaza_especie_idraza() {
-        return raza_especie_idraza;
-    }
-
-    public void setRaza_especie_idraza(int raza_especie_idraza) {
-        this.raza_especie_idraza = raza_especie_idraza;
-    }
-
     public String getRaza_otros() {
         return raza_otros;
     }
@@ -99,11 +97,19 @@ public class Mascota{
         this.raza_otros = raza_otros;
     }
 
-    public int getCuenta_idcuenta() {
+    public Raza_especie getRaza_especie() {
+        return raza_especie;
+    }
+
+    public void setRaza_especie(Raza_especie raza_especie) {
+        this.raza_especie = raza_especie;
+    }
+
+    public Raza_especie getCuenta_idcuenta() {
         return cuenta_idcuenta;
     }
 
-    public void setCuenta_idcuenta(int cuenta_idcuenta) {
+    public void setCuenta_idcuenta(Raza_especie cuenta_idcuenta) {
         this.cuenta_idcuenta = cuenta_idcuenta;
     }
 }
