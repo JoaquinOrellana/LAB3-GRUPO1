@@ -4,9 +4,10 @@ import com.example.lab3grupo1.dto.PrecioDto;
 import com.example.lab3grupo1.entity.Opcion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface OpcionRepository extends JpaRepository<Opcion, Integer> {
     @Query(value="select p.precio as precio FROM opcion p\n" +
             "inner join opcion_servicio s on (p.idopcion = s.idopcion_servicio)\n" +

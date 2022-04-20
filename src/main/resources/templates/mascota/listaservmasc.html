@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="fragments/general.html :: cabecera('Lista de Servicios por Mascota')">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Lista de Servicios por Mascota</h1>
+            <a class="btn btn-primary mt-4 mb-4" th:href="@{'/mascota/new'}">Nuevo Servicio</a>
+            <a class="btn btn-secondary ms-auto" th:href="@{'//lista'}">Regresar</a>
+
+            <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre mascota</th>
+                        <th>Edad</th>
+                        <th>Hora de Inicio</th>
+                        <th>Duración</th>
+                        <th>Entrega</th>
+                        <th>Nombre de Responsable</th>
+                        <th>Servicio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each= "servmasc,i : ${listaServiciosMascota}">
+                        <td th:text="${i.index + 1}"></td>
+                        <td th:text="${servmasc.nombremascota}"></td>
+                        <td th:text="${servmasc.edad}"></td>
+                        <td th:text="${servmasc.horainicio}"></td>
+                        <td th:text="${servmasc.duracion}"></td>
+                        <td th:text="${servmasc.entrega}"></td>
+                        <td th:text="${servmasc.responsable}"></td>
+                        <td th:text="${servmasc.servicio}"></td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
