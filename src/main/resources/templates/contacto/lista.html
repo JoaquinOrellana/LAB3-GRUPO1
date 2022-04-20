@@ -10,6 +10,37 @@
     <title>Lista de Contactos</title>
 </head>
 <body>
-
+<div class="container">
+    <h1>Lista de Contactos en TeleVet</h1>
+    <a class="btn btn-primary mt-4 mb-4" th:href="@{'/contacto/newForm'}">Nuevo Contacto</a>
+    <a class="btn btn-secondary ms-auto" th:href="@{'/'}">Pagina Principal</a>
+    <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nombre Contacto</th>
+            <th>Correo</th>
+            <th>Dirección</th>
+            <th>Telefono</th>
+            <th>Mascotas</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cuenta, info : ${listaCuenta}">
+            <td th:text="${info.index + 1}"></td>
+            <td th:text="${cuenta.correo}"></td>
+            <td th:text="${cuenta.direccion}"></td>
+            <td th:text="${cuenta.telefono}"></td>
+            <td><a class="btn btn-primary" th:href="@{'/contacto/editar' + '?id=' + ${cuenta.idcuenta}}">Editar</a>
+            </td>
+            <td><a class="btn btn-danger" th:href="@{'/contacto/delete' + '?id=' + ${cuenta.idcuenta}}">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
