@@ -14,7 +14,7 @@
 <h2>Editar Contacto</h2>
 <hr/>
 <form method="post" th:action="@{'/contacto/save'}" th:object="${contacto}">
-    <input th:if="*{idcuenta != 0 }" type="hidden" th:field="*{idcuenta}" />
+    <input th:if="*{id != 0 }" type="hidden" th:field="*{id}" />
     <div class="form-row">
         <div class="col-md-8 mb-4">
             <div class="form-group">
