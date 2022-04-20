@@ -1,7 +1,10 @@
 package com.example.lab3grupo1.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Date;
 
 @Entity
 @Table(name = "servicio")
@@ -15,12 +18,12 @@ public class Servicio {
     @JoinColumn(name = "mascota_idmascota", nullable = false)
     private Mascota idmascota;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "cuenta_idcuenta", nullable = false)
-//    private Cuenta idcuenta;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cuenta_idcuenta", nullable = false)
+    private Cuenta idcuenta;
 
     @Column(name = "hora_inicio", nullable = false)
-    private Instant horainicio;
+    private Date horainicio;
 
     @Column(name = "duracion", nullable = false)
     private Integer duracion;
@@ -57,21 +60,21 @@ public class Servicio {
         this.duracion = duracion;
     }
 
-    public Instant getHorainicio() {
+    public Date getHorainicio() {
         return horainicio;
     }
 
-    public void setHorainicio(Instant horainicio) {
+    public void setHorainicio(Date horainicio) {
         this.horainicio = horainicio;
     }
 
-//    public Cuenta getIdcuenta() {
-//        return idcuenta;
-//    }
+    public Cuenta getIdcuenta() {
+        return idcuenta;
+    }
 
-//    public void setIdcuenta(Cuenta idcuenta) {
-//        this.idcuenta = idcuenta;
-//    }
+    public void setIdcuenta(Cuenta idcuenta) {
+        this.idcuenta = idcuenta;
+    }
 
     public Mascota getIdmascota() {
         return idmascota;

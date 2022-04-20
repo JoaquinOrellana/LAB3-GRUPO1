@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/general.html :: cabecera('Lista Servicios')">
 </head>
 <body>
+<main>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 border-bottom">Lista de servicios</h1>
+        <div class="d-flex mt-3 mb-4">
+            <a class="btn btn-primary" th:href="@{'/servicio/nuevo'}">Nuevo servicio</a>
+            <a class="btn btn-secondary ms-auto" th:href="@{'/'}">Regresar</a>
+        </div>
+        <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
 
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Servicio</th>
+                <th>Precio</th>
+                <th>Responsable</th>
+                <th></th>
+            </tr>
+            <tr th:each="serv, info : ${listaOpServ}">
+                <td th:text="${info.index + 1}"></td>
+                <td th:text="${serv.idopcion.descripcion}"></td>
+                <td th:text="${serv.idopcion.precio}"></td>
+                <td th:text="${serv.idservicio.idresponsable.nombre}"></td>
+                <td><a class="btn btn-success" th:href="@{'/servicio/editar' + '?id=' + ${serv.id}}">Editar</a></td>
+            </tr>
+        </table>
+    </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <title>Nuevo servicio</title>
 </head>
 <body>
-
+<main>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 mb-3 border-bottom">Nuevo Servicio</h1>
+        <form method="post" th:action="@{'/servicio/guardar'}" class="mt-2">
+            <div class="mb-3">
+                <label for="idopcion.descripcion" class="form-label">Servicio</label>
+                <input name="idopcion.descripcion" type="text" class="form-control" id="idopcion.descripcion">
+            </div>
+            <div class="mb-3">
+                <label for="idopcion.precio" class="form-label">Precio</label>
+                <input name="idopcion.precio" type="text" class="form-control" id="idopcion.precio">
+            </div>
+            <div class="mb-3">
+                <label for="idresponsable" class="form-label">Responsable</label>
+                <select name="idresponsable.id" class="form-select" id="idresponsable">
+                    <option th:each="resp : ${listaResponsable}" th:text="${resp.getNombre()}"
+                            th:value="${resp.getId()}"></option>
+                </select>
+            </div>
+            <a th:href="@{'/servicio/lista'}" class="btn btn-danger">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+    </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
