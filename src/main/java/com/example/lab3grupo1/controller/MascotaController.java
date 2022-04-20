@@ -2,16 +2,18 @@ package com.example.lab3grupo1.controller;
 
 import com.example.lab3grupo1.entity.Mascota;
 import com.example.lab3grupo1.repository.MascotaRepository;
+import com.example.lab3grupo1.repository.RazaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/mascota")
@@ -22,8 +24,12 @@ public class MascotaController {
     @Autowired
     MascotaRepository mascotaRepository;
 
-    @GetMapping(value = {"","/lista"})
-    public String listaMascota(Model model){
+
+    @Autowired
+    RazaRepository razaRepository;
+
+    @GetMapping(value = {"", "/lista"})
+    public String listaMascota(Model model) {
         model.addAttribute("listaMascota", mascotaRepository.findAll());
 
         return "mascota/lista";
@@ -31,7 +37,7 @@ public class MascotaController {
 
 
     @PostMapping("/search")
-    public String buscar (Model model, @RequestParam("parametro") String parametro, @RequestParam("buscador") String buscador, RedirectAttributes attr){
+    public String buscar(Model model, @RequestParam("parametro") String parametro, @RequestParam("buscador") String buscador, RedirectAttributes attr) {
 
         try {
             if (parametro.equals("")) { // verifica que no esté vacío
@@ -42,7 +48,7 @@ public class MascotaController {
                 model.addAttribute("buscador", buscador);
                 parametro = parametro.toLowerCase();
 
-                switch (buscador){
+                switch (buscador) {
                     case "sexo":
                         List<Mascota> listaEmpleados1 = mascotaRepository.buscarPorSexo(parametro);
                         model.addAttribute("listaMascota", listaEmpleados1);
@@ -56,7 +62,7 @@ public class MascotaController {
                         model.addAttribute("listaMascota", listaEmpleados3);
                         break;
                     default:
-                        List<Mascota> listaEmpleados4= mascotaRepository.findAll();
+                        List<Mascota> listaEmpleados4 = mascotaRepository.findAll();
                         model.addAttribute("listaMascota", listaEmpleados4);
                         break;
                 }
@@ -69,10 +75,48 @@ public class MascotaController {
         }
 
 
+    }
 
+    @GetMapping("/new")
+    public String nuevoMascotaForm(@ModelAttribute("mascota") Mascota mascota, Model model) {
+        model.addAttribute("listaMascota", mascotaRepository.findAll());
+        model.addAttribute("listaRaza", razaRepository.findAll());
 
+        return "mascota/form";
+    }
+
+    @GetMapping("/edit")
+    public String editarMascota(@ModelAttribute("mascota") Mascota mascota,
+                                @RequestParam("idmascota") int id,
+                                Model model) {
+        Optional<Mascota> mascotaOptional = mascotaRepository.findById(id);
+        if (mascotaOptional.isPresent()) {
+            mascota = mascotaOptional.get();
+            model.addAttribute("listaMascota", mascotaRepository.findAll());
+            model.addAttribute("listaRaza", razaRepository.findAll());
+            ;
+            return "/mascota/form";
+        } else {
+            return "redirect:/mascota/lista";
+        }
+    }
+
+    @PostMapping("/save")
+    public String guardarMascota(@ModelAttribute("mascota") @Valid Mascota mascota, BindingResult bindingResult,
+                                 RedirectAttributes attr, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("listaMascota", mascotaRepository.findAll());
+            model.addAttribute("listaRaza", razaRepository.findAll());
+            return "mascota/form";
+        } else if (mascota.getIdmascota() == 0) {
+                attr.addFlashAttribute("msg", "Mascota creado exitosamente");
+                mascotaRepository.save(mascota);
+                return "redirect:/mascota/lista";
+            }
+        return "redirect:/mascota/lista";
+        }
     }
 
 
 
-}
+
