@@ -65,7 +65,6 @@ public class ServicioController {
                 servicio.setIdresponsable(r);
             }
         }
-
         opcionRepository.save(opc);
         servicioRepository.save(servicio);
         attr.addFlashAttribute("msg", "1");
@@ -86,7 +85,7 @@ public class ServicioController {
             model.addAttribute("listaResponsable", responsableRepository.findAll());
             return "servicio/editar";
         } else {
-            attr.addFlashAttribute("msg", "Error al editar");
+            attr.addFlashAttribute("msg", -1); // "Error al editar"
             return "redirect:/servicio/lista";
         }
     }
