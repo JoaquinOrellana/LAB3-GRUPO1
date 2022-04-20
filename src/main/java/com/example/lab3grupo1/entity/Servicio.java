@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -23,7 +24,7 @@ public class Servicio {
     private Cuenta idcuenta;
 
     @Column(name = "hora_inicio", nullable = false)
-    private Date horainicio;
+    private LocalDateTime horainicio;
 
     @Column(name = "duracion", nullable = false)
     private Integer duracion;
@@ -60,11 +61,11 @@ public class Servicio {
         this.duracion = duracion;
     }
 
-    public Date getHorainicio() {
+    public LocalDateTime getHorainicio() {
         return horainicio;
     }
 
-    public void setHorainicio(Date horainicio) {
+    public void setHorainicio(LocalDateTime horainicio) {
         this.horainicio = horainicio;
     }
 

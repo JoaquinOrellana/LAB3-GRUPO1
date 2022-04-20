@@ -7,7 +7,7 @@
         <div class="container">
             <h1>Lista de Servicios por Mascota</h1>
             <a class="btn btn-primary mt-4 mb-4" th:href="@{'/mascota/new'}">Nuevo Servicio</a>
-            <a class="btn btn-secondary ms-auto" th:href="@{'//lista'}">Regresar</a>
+            <a class="btn btn-secondary ms-auto" th:href="@{'/mascota'}">Regresar</a>
 
             <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
             <table class="table">

@@ -13,20 +13,49 @@
 <main>
     <div class="container px-4 py-5">
         <h1 class="pb-2 mb-3 border-bottom">Nuevo Servicio</h1>
-        <form method="post" th:action="@{'/servicio/guardar'}" class="mt-2">
+        <form method="post" th:action="@{'/servicio/guardarserv'}" class="mt-2">
             <div class="mb-3">
-                <label for="idopcion.descripcion" class="form-label">Servicio</label>
-                <input name="idopcion.descripcion" type="text" class="form-control" id="idopcion.descripcion">
+                <label class="form-label">Opción de servicio a elegir</label>
+                <select class="form-select" aria-label="Default select example" name="idopcion">
+                    <option th:each="opcion : ${listaOpcion}" th:value="${opcion.id}"
+                            th:text="|Descripción: ${opcion.descripcion} - Tiempo(min): ${opcion.tiempominutos} - Precio: ${opcion.precio}|"></option>
+                </select>
             </div>
             <div class="mb-3">
-                <label for="idopcion.precio" class="form-label">Precio</label>
-                <input name="idopcion.precio" type="text" class="form-control" id="idopcion.precio">
+                <label class="form-label">Mascota</label>
+                <select class="form-select" aria-label="Default select example" name="idmascota">
+                    <option th:each="mascota : ${listaMascotas}" th:value="${mascota.idmascota}"
+                            th:text="${mascota.nombre}"></option>
+                </select>
             </div>
             <div class="mb-3">
-                <label for="idresponsable" class="form-label">Responsable</label>
-                <select name="idresponsable.id" class="form-select" id="idresponsable">
-                    <option th:each="resp : ${listaResponsable}" th:text="${resp.getNombre()}"
-                            th:value="${resp.getId()}"></option>
+                <label class="form-label">Cuenta</label>
+                <select class="form-select" aria-label="Default select example" name="idcuenta">
+                    <option th:each="cuenta : ${listaCuenta}" th:value="${cuenta.id}"
+                            th:text="${cuenta.correo}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Hora inicio</label>
+                <input name="horainicio" type="datetime-local" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Duración en minutos</label>
+                <input name="duracion" type="number" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Entrega</label>
+                <select class="form-select" aria-label="Default select example" name="entrega">
+                    <option value="Domicilio">Domicilio</option>
+                    <option value="Recojo">Recojo</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Responsable del servicio</label>
+                <select class="form-select" aria-label="Default select example"
+                        name="idresponsable">
+                    <option th:each="resp : ${listaResponsable}" th:value="${resp.id}"
+                            th:text="${resp.nombre}"></option>
                 </select>
             </div>
             <a th:href="@{'/servicio/lista'}" class="btn btn-danger">Cancelar</a>

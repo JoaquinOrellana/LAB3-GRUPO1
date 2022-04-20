@@ -12,22 +12,32 @@
         </div>
         <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
 
-        <table class="table">
+        <table class="table table-striped">
             <tr>
                 <th>#</th>
                 <th>Servicio</th>
+                <th>Mascota</th>
                 <th>Precio</th>
+                <th>Hora inicio</th>
+                <th>Duración</th>
                 <th>Responsable</th>
+                <th>Entrega</th>
                 <th></th>
             </tr>
-            <tr th:each="serv, info : ${listaOpServ}">
-                <td th:text="${info.index + 1}"></td>
-                <td th:text="${serv.idopcion.descripcion}"></td>
-                <td th:text="${serv.idopcion.precio}"></td>
-                <td th:text="${serv.idservicio.idresponsable.nombre}"></td>
-                <td><a class="btn btn-success" th:href="@{'/servicio/editar' + '?id=' + ${serv.id}}">Editar</a></td>
+            <tr th:each="opserv,i : ${listaOpServ}">
+                <td th:text="${i.index + 1}"></td>
+                <td th:text="${opserv.idopcion.descripcion}"></td>
+                <td th:text="${opserv.idservicio.idmascota.nombre}"></td>
+                <td th:text="${opserv.idopcion.precio}"></td>
+                <td th:text="${opserv.idservicio.horainicio}"></td>
+                <td th:text="${opserv.idservicio.duracion} + min"></td>
+                <td th:text="${opserv.idservicio.idresponsable.nombre}"></td>
+                <td th:text="${opserv.idservicio.entrega}"></td>
+                <td>
+                    <a class="btn btn-success" th:href="@{'/servicio/editar?id=' + ${opserv.id}}">Editar
+                    </a>
+                </td>
             </tr>
-        </table>
     </div>
 </main>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

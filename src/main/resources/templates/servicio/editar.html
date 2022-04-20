@@ -13,20 +13,32 @@
 <main>
     <div class="container px-4 py-5">
         <h1 class="pb-2 mb-3 border-bottom">Editar Servicio</h1>
-        <form method="post" th:action="@{'/servicio/guardar'}" th:object="${servicio}" class="mt-2">
-            <input th:value="${servicio.id}" name="id" type="hidden"/>
-
-            <!--<div class="mb-3">
-                <label for="idopcion.precio" class="form-label">Precio</label>
-                <input th:value="${servicio.}" name="idopcion.precio" type="text" class="form-control" id="idopcion.precio" />
-            </div>-->
-
+        <form method="post" th:action="@{'/servicio/guardar'}" class="mt-2">
+                <input name="idopcion" type="number" class="form-control"
+                       th:value="${opcion.id}" hidden>
+                <div class="mb-3">
+                    <label class="form-label">Descripción</label>
+                    <input type="text" class="form-control"
+                           maxlength="45" th:value="${opcion.descripcion}" required disabled>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Tiempo en minutos</label>
+                    <input type="text" class="form-control"
+                           th:value="${opcion.tiempominutos}" required disabled>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Precio</label>
+                    <input name="precio" type="number" step="0.01" class="form-control" min="0"
+                           th:value="${opcion.precio}" required>
+                </div>
             <div class="mb-3">
                 <label class="form-label">Responsable</label>
-                <select id="responsable" th:field="*{idresponsable}" class="form-select">
-                    <option th:each="resp : ${listaResponsable}" th:text="${resp.getNombre()}"
-                            th:value="${resp.getId()}"></option>
-                </select>
+                <div class="mb-3">
+                    <input name="idservicio" type="number" class="form-control" th:value="${servicio.id}" hidden>
+                    <select class="form-select" aria-label="Default select example" name="idResponsable">
+                        <option th:each="resp : ${listaResponsable}" th:value="${resp.id}" th:text="${resp.nombre}" th:selected="${servicio.idresponsable.id == resp.id}"></option>
+                    </select>
+                </div>
             </div>
             <a th:href="@{'/servicio/lista'}" class="btn btn-danger">Cancelar</a>
             <button type="submit" class="btn btn-primary">Registrar</button>
